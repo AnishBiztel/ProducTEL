@@ -159,12 +159,12 @@ export default function ClientDetail({
             {c.issues.length === 0 && <div className="no-items">No issues logged.</div>}
             {c.issues.map((issue) => (
               <div key={issue.id} className={"issue-row" + (issue.resolved ? " resolved" : "")}>
-                <span onClick={() => toggleIssue(c.id, issue.id)} style={{ cursor: "pointer", display: "flex" }} title={issue.resolved ? "Mark as open" : "Mark as resolved"}>
+                <span onClick={() => toggleIssue(c.id, issue.id)} style={{ cursor: "pointer", display: "flex" }} aria-label={issue.resolved ? "Mark as open" : "Mark as resolved"}>
                   {issue.resolved ? <CheckCircle2 size={15} color="var(--accent)" /> : <Circle size={15} color="var(--muted-2)" />}
                 </span>
                 <span style={{ flex: 1 }}>{issue.text}</span>
                 {issue.resolved && <span className="resolved-badge">Resolved</span>}
-                <button className="icon-btn danger" onClick={() => deleteIssue(c.id, issue.id)} title="Delete issue">
+                <button className="icon-btn danger" onClick={() => deleteIssue(c.id, issue.id)} aria-label="Delete issue">
                   <Trash2 size={13} />
                 </button>
               </div>

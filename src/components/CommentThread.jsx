@@ -65,7 +65,7 @@ export default function CommentThread({ clientId, targetType, targetId, userEmai
                 <span className="comment-author">{c.user_email}</span>
                 <span className="comment-time">{timeAgo(c.created_at)}</span>
                 {(canDelete || c.user_email === userEmail) && (
-                  <button className="icon-btn danger" style={{ marginLeft: "auto" }} onClick={() => remove(c.id)} title="Delete">
+                  <button className="icon-btn danger" style={{ marginLeft: "auto" }} onClick={() => remove(c.id)} aria-label="Delete">
                     <Trash2 size={12} />
                   </button>
                 )}

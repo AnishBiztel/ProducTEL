@@ -286,19 +286,19 @@ export default function Workspace({ session, profile, onOpenSettings }) {
     <div className="app-shell">
       <div className="navrail">
         <div className="navrail-logo">PT</div>
-        <button className={"navrail-btn" + (mainView !== "trash" && mainView !== "product" ? " active" : "")} title="Dashboard" onClick={() => { setMainView("dashboard"); setSelectedId(null); }}>
+        <button className={"navrail-btn" + (mainView !== "trash" && mainView !== "product" ? " active" : "")} aria-label="Dashboard" onClick={() => { setMainView("dashboard"); setSelectedId(null); }}>
           <LayoutGrid size={18} />
         </button>
-        <button className={"navrail-btn" + (mainView === "product" ? " active" : "")} title="Product workspace" onClick={() => { setMainView("product"); setSelectedId(null); }}>
+        <button className={"navrail-btn" + (mainView === "product" ? " active" : "")} aria-label="Product workspace" onClick={() => { setMainView("product"); setSelectedId(null); }}>
           <Lightbulb size={18} />
         </button>
-        <button className={"navrail-btn" + (mainView === "trash" ? " active" : "")} title="Trash" onClick={() => { setMainView("trash"); setSelectedId(null); }}>
+        <button className={"navrail-btn" + (mainView === "trash" ? " active" : "")} aria-label="Trash" onClick={() => { setMainView("trash"); setSelectedId(null); }}>
           <Trash2 size={18} />
         </button>
         <div className="navrail-spacer" />
-        <button className="navrail-btn" title="Settings" onClick={onOpenSettings}><SettingsIcon size={18} /></button>
-        <button className="navrail-btn" title="Sign out" onClick={handleLogout}><LogOut size={18} /></button>
-        <div className="navrail-avatar" title={userEmail} onClick={onOpenSettings} style={{ marginTop: 4 }}>{initials(userEmail)}</div>
+        <button className="navrail-btn" aria-label="Settings" onClick={onOpenSettings}><SettingsIcon size={18} /></button>
+        <button className="navrail-btn" aria-label="Sign out" onClick={handleLogout}><LogOut size={18} /></button>
+        <div className="navrail-avatar" aria-label={userEmail} onClick={onOpenSettings} style={{ marginTop: 4 }}>{initials(userEmail)}</div>
       </div>
 
       {mainView !== "trash" && mainView !== "product" && (

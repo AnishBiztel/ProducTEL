@@ -123,10 +123,10 @@ export default function FilesPanel({ clientId, userEmail }) {
             <FileText size={16} color="var(--muted)" />
             <div className="file-name">{f.name.replace(/^\d+-/, "")}</div>
             <div className="file-meta">{formatSize(f.metadata?.size)}</div>
-            <button className="icon-btn" title="Download" onClick={() => handleDownload(f.name)}>
+            <button className="icon-btn" aria-label="Download" onClick={() => handleDownload(f.name)}>
               <Download size={14} />
             </button>
-            <button className="icon-btn danger" title="Delete" onClick={() => handleDelete(f.name)}>
+            <button className="icon-btn danger" aria-label="Delete" onClick={() => handleDelete(f.name)}>
               <Trash2 size={14} />
             </button>
           </div>

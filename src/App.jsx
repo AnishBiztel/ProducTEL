@@ -7,6 +7,7 @@ import Workspace from "./Workspace";
 import { ToastProvider } from "./components/Toast";
 import { ConfirmProvider } from "./components/ConfirmDialog";
 import { SkeletonLine } from "./components/Skeleton";
+import { ThemeProvider } from "./lib/ThemeContext";
 import "./styles.css";
 
 function AppInner() {
@@ -52,10 +53,12 @@ function AppInner() {
 
 export default function App() {
   return (
-    <ToastProvider>
-      <ConfirmProvider>
-        <AppInner />
-      </ConfirmProvider>
-    </ToastProvider>
+    <ThemeProvider>
+      <ToastProvider>
+        <ConfirmProvider>
+          <AppInner />
+        </ConfirmProvider>
+      </ToastProvider>
+    </ThemeProvider>
   );
 }

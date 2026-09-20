@@ -59,7 +59,7 @@ export default function Sidebar({
           return (
             <div key={c.id} className={"client-item" + (c.id === selectedId ? " active" : "")} onClick={() => onSelect(c.id)}>
               <div className="client-item-name">
-                <span className="priority-dot" style={{ background: PRIORITY_COLORS[c.priority || "Medium"] }} title={(c.priority || "Medium") + " priority"} />
+                <span className="priority-dot" style={{ background: PRIORITY_COLORS[c.priority || "Medium"] }} aria-label={(c.priority || "Medium") + " priority"} />
                 {c.name || "Untitled client"}
               </div>
               <div className="client-item-meta">

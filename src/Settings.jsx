@@ -4,8 +4,11 @@ import { supabase } from "./supabaseClient";
 import { fetchAllProfiles, setProfileRole, fetchWorkspaceSettings, updateWorkspaceSettings } from "./lib/api";
 import { DEFAULT_GATHERING_QUESTIONS, DEFAULT_GTD_STEPS } from "./lib/constants";
 import { useToast } from "./components/Toast";
+import ThemeToggle from "./components/ThemeToggle";
+import { useTheme } from "./lib/ThemeContext";
 
 export default function Settings({ session, profile, onBack }) {
+  const { theme } = useTheme();
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -88,6 +91,18 @@ export default function Settings({ session, profile, onBack }) {
         <div className="page-title">Settings</div>
         <div className="page-sub" style={{ marginBottom: 22 }}>
           Signed in as {session?.user?.email} {profile?.role && <span className="badge badge-accent" style={{ marginLeft: 8 }}>{profile.role}</span>}
+        </div>
+
+        <div className="card settings-card">
+          <div className="settings-section-title">Appearance</div>
+          <div className="settings-section-sub">Choose how ProducTEL looks on this device.</div>
+          <div className="appearance-row">
+            <div>
+              <div className="appearance-row-label">{theme === "light" ? "Light mode" : "Dark mode"}</div>
+              <div className="appearance-row-sub">Saved to this browser and applied automatically next time you visit.</div>
+            </div>
+            <ThemeToggle />
+          </div>
         </div>
 
         <div className="card settings-card">
