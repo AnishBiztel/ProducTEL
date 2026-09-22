@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { Activity, ArrowUpRight, CircleDot } from "lucide-react";
+import { Activity, ArrowUpRight } from "lucide-react";
 import { STAGES, STAGE_COLORS } from "../lib/constants";
 
 function hexToRgba(hex, alpha) {
@@ -41,7 +41,6 @@ export default function ProjectStatusChart({ clients = [] }) {
         <div>
           <div className="project-status-kicker"><Activity size={13} /> LIVE PIPELINE</div>
           <h2>Project Status</h2>
-          <p>Live distribution of projects across the client pipeline.</p>
         </div>
         <div className="project-status-live"><span /> Live</div>
       </div>
@@ -53,9 +52,6 @@ export default function ProjectStatusChart({ clients = [] }) {
               <strong>{statusData.total}</strong>
               <span>Active projects</span>
             </div>
-          </div>
-          <div className="project-status-total-note">
-            <CircleDot size={11} /> Updates automatically when client stages change
           </div>
         </div>
 

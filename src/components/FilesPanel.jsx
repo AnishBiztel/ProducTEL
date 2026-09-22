@@ -78,7 +78,6 @@ export default function FilesPanel({ clientId, userEmail }) {
   return (
     <div className="section">
       <div className="section-title">Files</div>
-      <div className="section-sub">Specs, POC decks, site photos, drawings — anything tied to this client.</div>
 
       {errored && (
         <div className="alert alert-error">

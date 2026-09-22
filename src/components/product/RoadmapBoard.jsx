@@ -9,7 +9,6 @@ export default function RoadmapBoard({ items, onUpdate, onDelete }) {
       <div className="page-header">
         <div>
           <div className="page-title">Roadmap</div>
-          <div className="page-sub">Move things along by changing the status on any card — Inbox items appear here once you promote them.</div>
         </div>
       </div>
 

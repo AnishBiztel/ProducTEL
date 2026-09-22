@@ -45,7 +45,6 @@ export default function HardwarePanel({ items, features, clients, onAdd, onUpdat
       <div className="page-header">
         <div>
           <div className="page-title">Hardware / BOM Tracker</div>
-          <div className="page-sub">Cameras, processors, enclosures — everything that goes into a physical prototype.</div>
         </div>
         <div className="page-actions">
           <select className="input" style={{ width: 180 }} value={clientFilter} onChange={(e) => setClientFilter(e.target.value)}>

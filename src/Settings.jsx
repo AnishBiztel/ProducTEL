@@ -95,7 +95,6 @@ export default function Settings({ session, profile, onBack }) {
 
         <div className="card settings-card">
           <div className="settings-section-title">Appearance</div>
-          <div className="settings-section-sub">Choose how ProducTEL looks on this device.</div>
           <div className="appearance-row">
             <div>
               <div className="appearance-row-label">{theme === "light" ? "Light mode" : "Dark mode"}</div>
@@ -107,7 +106,6 @@ export default function Settings({ session, profile, onBack }) {
 
         <div className="card settings-card">
           <div className="settings-section-title">Change password</div>
-          <div className="settings-section-sub">Update the password for your account.</div>
           {error && <div className="alert alert-error">{error}</div>}
           {notice && <div className="alert alert-notice">{notice}</div>}
           <form onSubmit={handleChangePassword}>
@@ -127,7 +125,6 @@ export default function Settings({ session, profile, onBack }) {
           <>
             <div className="card settings-card">
               <div className="settings-section-title"><Shield size={14} style={{ verticalAlign: -2, marginRight: 6 }} />Team &amp; roles</div>
-              <div className="settings-section-sub">Admins can permanently delete clients from Trash and manage roles.</div>
               {members === null && <div className="no-items">Loading…</div>}
               {members && members.map((m) => (
                 <div className="member-row" key={m.id}>
@@ -142,7 +139,6 @@ export default function Settings({ session, profile, onBack }) {
 
             <div className="card settings-card">
               <div className="settings-section-title">Default requirement-gathering questions</div>
-              <div className="settings-section-sub">Used to pre-fill the discovery checklist for every new client.</div>
               {gathering && gathering.map((q, i) => (
                 <div className="template-row" key={i}>
                   <input className="input" value={q} onChange={(e) => setGathering((g) => g.map((x, xi) => (xi === i ? e.target.value : x)))} />
@@ -154,7 +150,6 @@ export default function Settings({ session, profile, onBack }) {
 
             <div className="card settings-card">
               <div className="settings-section-title">Default go-to-deployment steps</div>
-              <div className="settings-section-sub">The rollout checklist pre-filled for every new client.</div>
               {gtdSteps && gtdSteps.map((s, i) => (
                 <div className="template-row" key={i}>
                   <input className="input" value={s} onChange={(e) => setGtdSteps((arr) => arr.map((x, xi) => (xi === i ? e.target.value : x)))} />

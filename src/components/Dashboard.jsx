@@ -92,7 +92,6 @@ export default function Dashboard({ allClients, filtered, onSelect }) {
       <div className="page-header">
         <div>
           <div className="page-title">Dashboard</div>
-          <div className="page-sub">Pipeline overview across all active clients</div>
         </div>
         <div className="page-actions">
           <div className="view-toggle">

@@ -17,7 +17,6 @@ export default function FeatureInbox({ items, onAdd, onUpdate, onDelete }) {
       <div className="page-header">
         <div>
           <div className="page-title">Idea &amp; Feature Inbox</div>
-          <div className="page-sub">Dump anything here — feature ideas, bug fixes, random requests. Sort it later.</div>
         </div>
       </div>
 

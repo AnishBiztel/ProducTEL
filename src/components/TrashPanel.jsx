@@ -50,7 +50,6 @@ export default function TrashPanel({ isAdmin, onChanged }) {
       <div className="page-header">
         <div>
           <div className="page-title">Trash</div>
-          <div className="page-sub">Deleted clients stay here until restored or permanently removed.</div>
         </div>
       </div>
 
@@ -81,9 +80,6 @@ export default function TrashPanel({ isAdmin, onChanged }) {
             )}
           </div>
         ))}
-      {!isAdmin && items && items.length > 0 && (
-        <div className="section-sub">Only workspace admins can permanently delete a client.</div>
-      )}
     </div>
   );
 }

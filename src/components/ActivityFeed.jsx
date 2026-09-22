@@ -18,7 +18,6 @@ export default function ActivityFeed({ clientId }) {
   return (
     <div className="section">
       <div className="section-title">Activity</div>
-      <div className="section-sub">Who changed what, and when — logged automatically.</div>
       {activity === null && <div className="no-items">Loading…</div>}
       {activity && activity.length === 0 && <div className="no-items">No activity recorded yet.</div>}
       {activity &&

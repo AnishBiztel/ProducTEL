@@ -24,7 +24,6 @@ export default function ChangelogPanel({ items, releases, onAddRelease, onDelete
       <div className="page-header">
         <div>
           <div className="page-title">Changelog</div>
-          <div className="page-sub">Record what shipped, and when.</div>
         </div>
       </div>
 
