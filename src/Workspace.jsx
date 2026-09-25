@@ -258,17 +258,28 @@ export default function Workspace({ session, profile, onOpenSettings }) {
       try {
         const data = JSON.parse(reader.result);
         if (!Array.isArray(data)) return toast.error("Not a valid backup", "That file doesn't look like a tracker backup.");
+
+        const existingNames = new Set(clients.map((c) => (c.name || "").trim().toLowerCase()).filter(Boolean));
+        const incoming = data.map(ensureShape);
+        const duplicates = incoming.filter((c) => c.name && existingNames.has(c.name.trim().toLowerCase()));
+        const toAdd = incoming.filter((c) => !c.name || !existingNames.has(c.name.trim().toLowerCase()));
+
+        if (toAdd.length === 0) {
+          return toast.info("Nothing to restore", "Every client in this file already exists here by name.");
+        }
+
+        const dupNote = duplicates.length ? ` (${duplicates.length} skipped as already-existing: ${duplicates.map((d) => d.name).slice(0, 3).join(", ")}${duplicates.length > 3 ? "…" : ""})` : "";
         const ok = await confirmDialog(
-          `Import ${data.length} client(s) into the shared workspace? This adds them alongside what's already there.`,
-          { title: "Import backup?", danger: false, confirmLabel: "Import" }
+          `Restore ${toAdd.length} client(s) into the shared workspace?${dupNote}`,
+          { title: "Restore backup?", danger: false, confirmLabel: "Restore" }
         );
         if (!ok) return;
-        const shaped = data.map(ensureShape).map((c) => ({ ...c, id: uid() }));
+        const shaped = toAdd.map((c) => ({ ...c, id: uid() }));
         setSaveState("saving");
         const rows = shaped.map((c) => ({ id: c.id, name: c.name, contact: c.contact, industry: c.industry, stage: c.stage, churned: c.churned, priority: c.priority, overview: c.overview, next_action: c.nextAction, next_action_date: c.nextActionDate || null, last_contact: c.lastContact || null, issues: c.issues, specs: c.specs, gtd: c.gtd, gathering: c.gathering, created_by: session?.user?.id || null, created_at: new Date().toISOString(), stage_entered_at: new Date().toISOString() }));
         await bulkInsertClients(rows);
         setSaveState("synced");
-        toast.success("Import complete", `${shaped.length} client(s) added.`);
+        toast.success("Restore complete", `${shaped.length} client(s) added${duplicates.length ? `, ${duplicates.length} skipped as duplicates` : ""}.`);
         loadClients();
       } catch (err) {
         toast.error("Couldn't read that file", "Make sure it's a valid backup export.");

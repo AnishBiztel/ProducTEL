@@ -8,7 +8,7 @@ export default function RoadmapBoard({ items, onUpdate, onDelete }) {
     <div className="main-inner">
       <div className="page-header">
         <div>
-          <div className="page-title">Roadmap</div>
+          <h1 className="page-title">Roadmap</h1>
         </div>
       </div>
 

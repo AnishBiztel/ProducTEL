@@ -205,7 +205,7 @@ export default function ClientDetail({
                   <div className="gtd-progress-bar"><div className="gtd-progress-fill" style={{ width: pct + "%" }} /></div>
                   <div className="gtd-progress-label">{answered} of {items.length} answered ({pct}%)</div>
                 </div>
-                <button className="add-card-btn" onClick={() => addGatheringQuestion(c.id)}>+ Add question</button>
+                <button className="btn btn-ghost btn-dashed" style={{ width: "100%", justifyContent: "center" }} onClick={() => addGatheringQuestion(c.id)}>+ Add question</button>
                 <div style={{ marginTop: 12 }}>
                   {items.length === 0 && <div className="no-items">No questions yet.</div>}
                   {items.map((item) => {
@@ -256,7 +256,7 @@ export default function ClientDetail({
       {tab === "specs" && (
         <div className="section">
           <div className="section-title">Requirements &amp; specs</div>
-          <button className="add-card-btn" style={{ marginBottom: 12 }} onClick={() => { addSpec(c.id); }}>+ Add spec</button>
+          <button className="btn btn-ghost btn-dashed" style={{ width: "100%", justifyContent: "center", marginBottom: 12 }} onClick={() => { addSpec(c.id); }}>+ Add spec</button>
           {c.specs.length === 0 && <div className="no-items">No specs yet.</div>}
           {c.specs.map((spec) => {
             const open = expandedSpec === spec.id;

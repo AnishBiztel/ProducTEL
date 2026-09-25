@@ -91,7 +91,7 @@ export default function Dashboard({ allClients, filtered, onSelect }) {
     <div className="main-inner">
       <div className="page-header">
         <div>
-          <div className="page-title">Dashboard</div>
+          <h1 className="page-title">Dashboard</h1>
         </div>
         <div className="page-actions">
           <div className="view-toggle">

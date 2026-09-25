@@ -42,7 +42,14 @@ export default function ProjectStatusChart({ clients = [] }) {
           <div className="project-status-kicker"><Activity size={13} /> LIVE PIPELINE</div>
           <h2>Project Status</h2>
         </div>
-        <div className="project-status-live"><span /> Live</div>
+        <div className="project-status-head-meta">
+          <div className="project-status-live"><span /> Live</div>
+          {statusData.churned > 0 && (
+            <div className="project-status-churned-badge">
+              <span className="project-status-dot" style={{ background: STAGE_COLORS.Churned }} /> {statusData.churned} churned
+            </div>
+          )}
+        </div>
       </div>
 
       <div className="project-status-body">
@@ -78,7 +85,6 @@ export default function ProjectStatusChart({ clients = [] }) {
 
       {statusData.churned > 0 && (
         <div className="project-status-footer">
-          <span><span className="project-status-dot" style={{ background: STAGE_COLORS.Churned }} /> {statusData.churned} churned</span>
           <span>Excluded from active project distribution</span>
         </div>
       )}

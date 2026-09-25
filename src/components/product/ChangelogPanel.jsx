@@ -23,7 +23,7 @@ export default function ChangelogPanel({ items, releases, onAddRelease, onDelete
     <div className="main-inner">
       <div className="page-header">
         <div>
-          <div className="page-title">Changelog</div>
+          <h1 className="page-title">Changelog</h1>
         </div>
       </div>
 

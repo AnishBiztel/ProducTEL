@@ -16,7 +16,7 @@ export default function FeatureInbox({ items, onAdd, onUpdate, onDelete }) {
     <div className="main-inner">
       <div className="page-header">
         <div>
-          <div className="page-title">Idea &amp; Feature Inbox</div>
+          <h1 className="page-title">Idea &amp; Feature Inbox</h1>
         </div>
       </div>
 

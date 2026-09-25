@@ -88,7 +88,7 @@ export default function Settings({ session, profile, onBack }) {
         <button className="btn btn-ghost btn-sm" onClick={onBack} style={{ marginBottom: 20 }}>
           <ArrowLeft size={14} /> Back to tracker
         </button>
-        <div className="page-title">Settings</div>
+        <h1 className="page-title">Settings</h1>
         <div className="page-sub" style={{ marginBottom: 22 }}>
           Signed in as {session?.user?.email} {profile?.role && <span className="badge badge-accent" style={{ marginLeft: 8 }}>{profile.role}</span>}
         </div>
@@ -145,7 +145,7 @@ export default function Settings({ session, profile, onBack }) {
                   <button className="icon-btn danger" onClick={() => setGathering((g) => g.filter((_, xi) => xi !== i))}><Trash2 size={14} /></button>
                 </div>
               ))}
-              <button className="add-card-btn" onClick={() => setGathering((g) => [...(g || []), ""])}><Plus size={13} /> Add question</button>
+              <button className="btn btn-ghost btn-dashed" style={{ width: "100%", justifyContent: "center" }} onClick={() => setGathering((g) => [...(g || []), ""])}><Plus size={13} /> Add question</button>
             </div>
 
             <div className="card settings-card">
@@ -156,7 +156,7 @@ export default function Settings({ session, profile, onBack }) {
                   <button className="icon-btn danger" onClick={() => setGtdSteps((arr) => arr.filter((_, xi) => xi !== i))}><Trash2 size={14} /></button>
                 </div>
               ))}
-              <button className="add-card-btn" onClick={() => setGtdSteps((arr) => [...(arr || []), ""])}><Plus size={13} /> Add step</button>
+              <button className="btn btn-ghost btn-dashed" style={{ width: "100%", justifyContent: "center" }} onClick={() => setGtdSteps((arr) => [...(arr || []), ""])}><Plus size={13} /> Add step</button>
               <button className="btn btn-primary" style={{ marginTop: 14 }} onClick={saveTemplates} disabled={templateSaving}>
                 {templateSaving ? "Saving…" : "Save templates"}
               </button>

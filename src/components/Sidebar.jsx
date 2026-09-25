@@ -47,7 +47,7 @@ export default function Sidebar({
         <input placeholder="Search clients or specs" value={query} onChange={(e) => setQuery(e.target.value)} />
       </div>
 
-      <button className="add-btn" onClick={onAddClient}><Plus size={15} /> New client</button>
+      <button className="btn btn-primary" style={{ width: "calc(100% - 32px)", justifyContent: "center", margin: "0 16px 12px" }} onClick={onAddClient}><Plus size={15} /> New client</button>
 
       <div className="client-list">
         {filtered.length === 0 && <div className="empty-sidebar">No clients match. Adjust filters or add one.</div>}
@@ -78,11 +78,11 @@ export default function Sidebar({
         })}
       </div>
 
-      <div className="sidebar-footer">
-        <button className="btn btn-sm" onClick={onExport}><Download size={13} /> Export</button>
-        <button className="btn btn-sm" onClick={() => fileInputRef.current.click()}><Upload size={13} /> Import</button>
+      <footer className="sidebar-footer" aria-label="Backup and restore">
+        <button className="btn btn-sm" onClick={onExport} aria-label="Download a full JSON backup of all clients"><Download size={13} /> Backup</button>
+        <button className="btn btn-sm" onClick={() => fileInputRef.current.click()} aria-label="Restore clients from a JSON backup file"><Upload size={13} /> Restore</button>
         <input ref={fileInputRef} type="file" accept="application/json" style={{ display: "none" }} onChange={onImport} />
-      </div>
+      </footer>
     </div>
   );
 }

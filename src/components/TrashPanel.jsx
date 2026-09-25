@@ -49,7 +49,7 @@ export default function TrashPanel({ isAdmin, onChanged }) {
     <div className="main-inner">
       <div className="page-header">
         <div>
-          <div className="page-title">Trash</div>
+          <h1 className="page-title">Trash</h1>
         </div>
       </div>
 
