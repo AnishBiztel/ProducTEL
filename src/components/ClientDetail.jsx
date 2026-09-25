@@ -50,7 +50,7 @@ export default function ClientDetail({
           onCommit={(v) => updateClient(c.id, { name: v })}
           onKeyDown={handleEnterSave}
         />
-        <div className="meta-row">
+        <div className="meta-row meta-row-fill">
           <div className="meta-field">
             <label>Contact</label>
             <DebouncedField placeholder="Name, role" value={c.contact} onCommit={(v) => updateClient(c.id, { contact: v })} onKeyDown={handleEnterSave} />
@@ -91,12 +91,14 @@ export default function ClientDetail({
           const isDone = i < currentIdx || (i === currentIdx && !c.churned);
           const isCurrent = i === currentIdx;
           return (
-            <div className="pipeline-node-wrap" key={stage} style={{ flex: i === STAGES.length - 1 ? "0 0 auto" : 1 }}>
+            <div className="pipeline-node-wrap" key={stage} style={{ flex: 1 }}>
               <div className="pipeline-node" onClick={() => updateClient(c.id, { stage, churned: false })}>
                 <div className={"pipeline-dot" + (isDone ? " done" : "") + (isCurrent ? " current" : "")} />
                 <div className={"pipeline-label" + (isCurrent ? " active" : "")}>{stage}</div>
               </div>
-              {i < STAGES.length - 1 && <div className={"pipeline-track" + (i < currentIdx ? " done" : "")} />}
+              {i < STAGES.length - 1 && (
+                <div className={"pipeline-track" + (i < currentIdx - 1 ? " done" : i === currentIdx - 1 ? " active" : "")} />
+              )}
             </div>
           );
         })}
@@ -141,8 +143,7 @@ export default function ClientDetail({
             <div className="section-title">Next action</div>
             <div className="meta-row" style={{ marginTop: 0 }}>
               <div className="meta-field" style={{ flex: 1 }}>
-                <label>What's next</label>
-                <DebouncedField placeholder="e.g. send POC results deck" value={c.nextAction} onCommit={(v) => updateClient(c.id, { nextAction: v })} onKeyDown={handleEnterSave} style={{ minWidth: 280 }} />
+                <DebouncedField aria-label="Next action" placeholder="e.g. send POC results deck" value={c.nextAction} onCommit={(v) => updateClient(c.id, { nextAction: v })} onKeyDown={handleEnterSave} style={{ minWidth: 280 }} />
               </div>
               <div className="meta-field">
                 <label>Due</label>
