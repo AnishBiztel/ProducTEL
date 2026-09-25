@@ -1,4 +1,4 @@
-import { Search, Plus, Download, Upload } from "lucide-react";
+import { Search, Download, Upload } from "lucide-react";
 import { STAGES, STAGE_COLORS, PRIORITY_COLORS, STUCK_STAGE_DAYS } from "../lib/constants";
 import { timeAgo, isOverdue, daysSince } from "../lib/helpers";
 
@@ -10,7 +10,6 @@ export default function Sidebar({
   setQuery,
   stageFilter,
   setStageFilter,
-  onAddClient,
   syncState,
   onExport,
   onImport,
@@ -46,8 +45,6 @@ export default function Sidebar({
         <Search size={14} color="var(--muted-2)" />
         <input placeholder="Search clients or specs" value={query} onChange={(e) => setQuery(e.target.value)} />
       </div>
-
-      <button className="btn btn-primary" style={{ width: "calc(100% - 32px)", justifyContent: "center", margin: "0 16px 12px" }} onClick={onAddClient}><Plus size={15} /> New client</button>
 
       <div className="client-list">
         {filtered.length === 0 && <div className="empty-sidebar">No clients match. Adjust filters or add one.</div>}

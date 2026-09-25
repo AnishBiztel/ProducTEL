@@ -321,7 +321,6 @@ export default function Workspace({ session, profile, onOpenSettings }) {
           setQuery={setQuery}
           stageFilter={stageFilter}
           setStageFilter={setStageFilter}
-          onAddClient={addClient}
           syncState={saveState}
           onExport={exportData}
           onImport={importData}
