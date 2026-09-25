@@ -1,11 +1,11 @@
 import { supabase } from "../supabaseClient";
 import { uid } from "./helpers";
-import { DEFAULT_GATHERING_QUESTIONS, DEFAULT_GTD_STEPS } from "./constants";
+import { DEFAULT_GTD_STEPS } from "./constants";
 
 /* ---------- shaping helpers ---------- */
 
 export function freshGathering(questions) {
-  const list = questions && questions.length ? questions : DEFAULT_GATHERING_QUESTIONS;
+  const list = questions && questions.length ? questions : [];
   return list.map((q) => ({ id: uid(), question: q, answer: "", updatedAt: "" }));
 }
 

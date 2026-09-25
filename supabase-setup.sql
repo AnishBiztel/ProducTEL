@@ -81,6 +81,24 @@ create table if not exists clients (
 
 alter table clients add column if not exists stage_entered_at timestamptz default now();
 alter table clients add column if not exists deleted_at timestamptz;
+-- Defensive: fills in every column the app needs even if the table already
+-- existed with a different shape (e.g. from an external script). Safe no-ops
+-- if the columns are already there.
+alter table clients add column if not exists contact text default '';
+alter table clients add column if not exists industry text default '';
+alter table clients add column if not exists stage text default 'Lead';
+alter table clients add column if not exists churned boolean default false;
+alter table clients add column if not exists priority text default 'Medium';
+alter table clients add column if not exists overview text default '';
+alter table clients add column if not exists next_action text default '';
+alter table clients add column if not exists next_action_date date;
+alter table clients add column if not exists last_contact date;
+alter table clients add column if not exists issues jsonb default '[]'::jsonb;
+alter table clients add column if not exists specs jsonb default '[]'::jsonb;
+alter table clients add column if not exists gtd jsonb default '[]'::jsonb;
+alter table clients add column if not exists gathering jsonb default '[]'::jsonb;
+alter table clients add column if not exists created_at timestamptz default now();
+alter table clients add column if not exists updated_at timestamptz default now();
 
 alter table clients enable row level security;
 
