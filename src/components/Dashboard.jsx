@@ -8,10 +8,20 @@ function stageDuration(c) {
   return daysSince(c.stageEnteredAt);
 }
 
-export default function Dashboard({ allClients, filtered, onSelect }) {
+export default function Dashboard({ allClients, filtered, onSelect, onAddClient }) {
   const [view, setView] = useState("kanban");
   const [sortKey, setSortKey] = useState("updatedAt");
   const [sortDir, setSortDir] = useState("desc");
+
+  const kpis = useMemo(() => {
+    const active = allClients.filter((c) => !c.churned);
+    const issues = active.reduce((sum, c) => sum + c.issues.filter((i) => !i.resolved).length, 0);
+    const pending = allClients.reduce(
+      (sum, c) => sum + c.specs.filter((s) => s.status === "Draft" || s.status === "Reviewed with Eng").length,
+      0
+    );
+    return { total: allClients.length, active: active.length, issues, pending };
+  }, [allClients]);
 
   const digest = useMemo(() => {
     const active = allClients.filter((c) => !c.churned);
@@ -89,11 +99,16 @@ export default function Dashboard({ allClients, filtered, onSelect }) {
 
   return (
     <div className="main-inner">
+      <nav className="breadcrumb" aria-label="Breadcrumb">
+        <span>Clients</span> <span className="breadcrumb-sep">/</span> <span className="breadcrumb-current">Dashboard</span>
+      </nav>
+
       <div className="page-header">
         <div>
           <h1 className="page-title">Dashboard</h1>
         </div>
         <div className="page-actions">
+          <button className="btn btn-primary btn-sm" onClick={onAddClient}>+ New client</button>
           <div className="view-toggle">
             <button className={view === "kanban" ? "active" : ""} onClick={() => setView("kanban")}>
               <LayoutGrid size={13} /> Board
@@ -105,6 +120,29 @@ export default function Dashboard({ allClients, filtered, onSelect }) {
           <button className="btn btn-sm" onClick={exportCSV}>
             <Download size={13} /> Export CSV
           </button>
+        </div>
+      </div>
+
+      <div className="kpi-row">
+        <div className="kpi-card">
+          <div className="kpi-num">{kpis.total}</div>
+          <div className="kpi-label">Clients</div>
+          <div className="kpi-bar" style={{ background: "var(--accent)" }} />
+        </div>
+        <div className="kpi-card">
+          <div className="kpi-num">{kpis.active}</div>
+          <div className="kpi-label">Active</div>
+          <div className="kpi-bar" style={{ background: "var(--green)" }} />
+        </div>
+        <div className="kpi-card">
+          <div className="kpi-num">{kpis.issues}</div>
+          <div className="kpi-label">Issues</div>
+          <div className="kpi-bar" style={{ background: "var(--red)" }} />
+        </div>
+        <div className="kpi-card">
+          <div className="kpi-num">{kpis.pending}</div>
+          <div className="kpi-label">Pending</div>
+          <div className="kpi-bar" style={{ background: "var(--amber)" }} />
         </div>
       </div>
 

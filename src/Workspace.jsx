@@ -337,7 +337,7 @@ export default function Workspace({ session, profile, onOpenSettings }) {
         {mainView === "trash" && <TrashPanel isAdmin={isAdmin} onChanged={loadClients} />}
         {mainView === "product" && <ProductWorkspace session={session} />}
         {mainView === "dashboard" && (
-          <Dashboard allClients={clients} filtered={filtered} onSelect={selectClient} />
+          <Dashboard allClients={clients} filtered={filtered} onSelect={selectClient} onAddClient={addClient} />
         )}
         {mainView === "client" && selected && (
           <ClientDetail
