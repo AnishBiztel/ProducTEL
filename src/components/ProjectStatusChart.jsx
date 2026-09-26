@@ -39,7 +39,7 @@ export default function ProjectStatusChart({ clients = [] }) {
     <section className="project-status-card" aria-label="Project status overview">
       <div className="project-status-head">
         <div>
-          <div className="project-status-kicker"><Activity size={13} /> LIVE PIPELINE</div>
+          <div className="project-status-kicker"><Activity size={13} /> Live pipeline</div>
           <h2>Project Status</h2>
         </div>
         <div className="project-status-head-meta">
