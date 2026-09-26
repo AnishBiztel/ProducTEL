@@ -1,6 +1,18 @@
 import { useMemo } from "react";
 import { STAGES, STAGE_COLORS } from "../lib/constants";
 
+// A monochrome blue scale for this chart specifically, matching the Salesforce-style
+// reference — distinct from STAGE_COLORS (used for badges/pills elsewhere), which keep
+// their more distinguishable per-stage hues since those serve a wayfinding purpose.
+const CHART_BLUE_SCALE = {
+  Lead: "#0A3D7A",
+  Discovery: "#7CC4FF",
+  POC: "#4FABFF",
+  Contract: "#1B6FE0",
+  Deployed: "#8A99AC",
+  "Live Support": "#0176D3",
+};
+
 function hexToRgba(hex, alpha) {
   const clean = String(hex || "#8B8FA3").replace("#", "");
   const value = clean.length === 3 ? clean.split("").map((c) => c + c).join("") : clean;
@@ -15,7 +27,7 @@ export default function ProjectStatusChart({ clients = [] }) {
     const counts = STAGES.map((stage) => ({
       stage,
       count: active.filter((client) => client.stage === stage).length,
-      color: STAGE_COLORS[stage],
+      color: CHART_BLUE_SCALE[stage] || STAGE_COLORS[stage],
     }));
     const total = counts.reduce((sum, item) => sum + item.count, 0);
     const churned = clients.filter((client) => client.churned).length;
