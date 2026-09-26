@@ -348,7 +348,6 @@ export default function Workspace({ session, profile, onOpenSettings }) {
             onOpenTrash={() => { setMainView("trash"); setSelectedId(null); }}
             onOpenSettings={onOpenSettings}
             onLogout={handleLogout}
-            onOpenHardware={() => handleTopNavigate("hardware")}
             onGoDashboard={() => { setMainView("dashboard"); setSelectedId(null); setTopNavTab("overview"); }}
             trashActive={mainView === "trash"}
           />
@@ -389,7 +388,7 @@ export default function Workspace({ session, profile, onOpenSettings }) {
         </div>
 
         {(mainView === "dashboard" || mainView === "client") && (
-          <RightRail allClients={clients} onSelectClient={selectClient} />
+          <RightRail allClients={clients} />
         )}
       </div>
     </>

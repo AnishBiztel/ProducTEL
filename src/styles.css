@@ -634,9 +634,8 @@ button, input, textarea, select { transition: border-color .18s ease, background
 /* Shell */
 .navrail {
   width: 68px;
-  background: rgba(20, 21, 24, .92);
+  background: var(--panel);
   border-right: 1px solid var(--line);
-  backdrop-filter: blur(18px);
   padding: 14px 0;
 }
 .navrail-logo {
@@ -660,32 +659,12 @@ button, input, textarea, select { transition: border-color .18s ease, background
 
 .sidebar {
   width: 310px;
-  background: rgba(21, 22, 25, .88);
-  backdrop-filter: blur(18px);
+  background: var(--panel);
 }
 .sidebar-head { padding: 20px 18px 14px; }
 .sidebar-title { font-size: 14px; letter-spacing: -.01em; }
 .stats-bar { padding-top: 14px; padding-bottom: 10px; }
 .stat-num { font-size: 18px; }
-
-/* The nav rail and client sidebar are always dark by design (a fixed brand
-   rail), independent of the light/dark theme toggle for the main content
-   area — so their text/border tokens are pinned here rather than inherited
-   from :root, which the light theme redefines to dark-on-light values. */
-.navrail, .sidebar {
-  --ink: #f2f1ee;
-  --muted: #a0a09b;
-  --muted-2: #6f6f6a;
-  --panel: #18191c;
-  --panel-2: #1c1d20;
-  --panel-3: #212225;
-  --panel-4: #27282c;
-  --line: rgba(180, 178, 172, .14);
-  --line-soft: rgba(180, 178, 172, .08);
-  --line-bright: rgba(180, 178, 172, .26);
-  --accent-soft: rgba(210, 118, 46, .16);
-  --accent-ink: #f0b37a;
-}
 .search-box {
   background: var(--panel-3);
   border-color: var(--line-bright);

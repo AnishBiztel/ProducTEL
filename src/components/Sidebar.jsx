@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Search, Download, Upload, ChevronDown, ChevronRight, Folder, Users, Activity, BarChart3, Cpu, Trash2, Settings as SettingsIcon, LogOut } from "lucide-react";
+import { Search, Download, Upload, ChevronDown, ChevronRight, Folder, Users, Activity, Trash2, Settings as SettingsIcon, LogOut } from "lucide-react";
 import { STAGES, STAGE_COLORS, PRIORITY_COLORS, STUCK_STAGE_DAYS } from "../lib/constants";
 import { timeAgo, isOverdue, daysSince } from "../lib/helpers";
 
@@ -27,12 +27,10 @@ export default function Sidebar({
   onOpenTrash,
   onOpenSettings,
   onLogout,
-  onOpenHardware,
   onGoDashboard,
   trashActive,
 }) {
   const [projectsOpen, setProjectsOpen] = useState(true);
-  const [analyticsOpen, setAnalyticsOpen] = useState(true);
 
   function resetToDashboard() {
     setStageFilter("All");
@@ -98,16 +96,6 @@ export default function Sidebar({
             </div>
           );
         })}
-      </div>
-
-      <div className="sidebar-nav-group sidebar-nav-group-bottom">
-        <SectionHeader label="Analytics & Assets" open={analyticsOpen} onToggle={() => setAnalyticsOpen((o) => !o)} />
-        {analyticsOpen && (
-          <div className="sidebar-nav-items">
-            <button className="sidebar-nav-item" onClick={resetToDashboard}><BarChart3 size={13} /> Reports &amp; KPI Dashboards</button>
-            <button className="sidebar-nav-item" onClick={onOpenHardware}><Cpu size={13} /> Hardware BOM Tracker</button>
-          </div>
-        )}
       </div>
 
       <footer className="sidebar-footer" aria-label="Workspace actions">

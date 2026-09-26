@@ -1,9 +1,7 @@
 import { useMemo } from "react";
-import { CheckCircle2, Circle, AlertCircle } from "lucide-react";
 import { STAGES, STAGE_COLORS } from "../lib/constants";
-import { daysSince } from "../lib/helpers";
 
-export default function RightRail({ allClients, onSelectClient }) {
+export default function RightRail({ allClients }) {
   const stats = useMemo(() => {
     const active = allClients.filter((c) => !c.churned);
     const openIssues = active.reduce((sum, c) => sum + c.issues.filter((i) => !i.resolved).length, 0);
@@ -26,20 +24,6 @@ export default function RightRail({ allClients, onSelectClient }) {
 
   const maxCount = Math.max(1, ...distribution.map((d) => d.count));
 
-  const checklist = useMemo(() => {
-    const items = [];
-    allClients.forEach((c) => {
-      if (c.churned) return;
-      (c.gtd || [])
-        .filter((s) => !s.done)
-        .forEach((s) => items.push({ id: `${c.id}-${s.id}`, clientId: c.id, clientName: c.name, label: s.label, alert: false }));
-      c.issues
-        .filter((i) => !i.resolved)
-        .forEach((i) => items.push({ id: `${c.id}-${i.id}`, clientId: c.id, clientName: c.name, label: i.text, alert: true }));
-    });
-    return items.sort((a, b) => (b.alert ? 1 : 0) - (a.alert ? 1 : 0)).slice(0, 8);
-  }, [allClients]);
-
   return (
     <aside className="right-rail">
       <div className="right-rail-section">
@@ -61,20 +45,6 @@ export default function RightRail({ allClients, onSelectClient }) {
             <span className="rail-dist-label">{d.stage}</span>
             <div className="rail-dist-bar"><div className="rail-dist-bar-fill" style={{ width: (d.count / maxCount) * 100 + "%", background: STAGE_COLORS[d.stage] }} /></div>
             <span className="rail-dist-count">{d.count}</span>
-          </div>
-        ))}
-      </div>
-
-      <div className="right-rail-section">
-        <div className="right-rail-title">Action checklist</div>
-        {checklist.length === 0 && <div className="no-items" style={{ padding: "8px 0" }}>Nothing pending — nice.</div>}
-        {checklist.map((item) => (
-          <div className="rail-checklist-row" key={item.id} onClick={() => onSelectClient(item.clientId)}>
-            {item.alert ? <AlertCircle size={14} color="var(--red)" /> : <Circle size={14} color="var(--muted-2)" />}
-            <div className="rail-checklist-text">
-              <div className="rail-checklist-label">{item.label}</div>
-              <div className="rail-checklist-client">{item.clientName || "Untitled client"}</div>
-            </div>
           </div>
         ))}
       </div>

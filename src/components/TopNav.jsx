@@ -1,12 +1,11 @@
 import { useState, useEffect } from "react";
-import { LayoutGrid, Users, Map, BarChart3, Cpu, Search, Bell, Plus, CheckSquare } from "lucide-react";
+import { LayoutGrid, Users, Map, Cpu, Search, Bell, Plus, CheckSquare } from "lucide-react";
 import { initials } from "../lib/helpers";
 
 const TABS = [
   { key: "overview", label: "Overview", icon: LayoutGrid },
   { key: "clients", label: "Clients", icon: Users },
   { key: "roadmap", label: "Roadmap", icon: Map },
-  { key: "analytics", label: "Analytics", icon: BarChart3 },
   { key: "hardware", label: "Hardware / BOM", icon: Cpu },
 ];
 
