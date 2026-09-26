@@ -5,7 +5,7 @@ import {
   fetchClients, insertClient, updateClientRow, softDeleteClient, bulkInsertClients,
   logActivity, emptyClient, emptySpec, ensureShape, fetchWorkspaceSettings,
 } from "./lib/api";
-import { initials, uid, isOverdue } from "./lib/helpers";
+import { initials, uid } from "./lib/helpers";
 import { refreshWhenIdle } from "./lib/editGuard";
 import { useToast } from "./components/Toast";
 import { useConfirm } from "./components/ConfirmDialog";
@@ -314,18 +314,15 @@ export default function Workspace({ session, profile, onOpenSettings }) {
     }
   }
 
-  const notificationCount = clients.filter((c) => !c.churned && isOverdue(c.nextActionDate)).length;
 
   return (
     <>
       <TopNav
         activeTab={topNavTab}
         onNavigate={handleTopNavigate}
-        notificationCount={notificationCount}
         userEmail={userEmail}
         onOpenSettings={onOpenSettings}
-        onNewActivity={addClient}
-        onCreateTask={() => handleTopNavigate("roadmap")}
+        onNewClient={addClient}
       />
       <div className="app-shell app-shell-no-navrail">
         {mainView !== "trash" && mainView !== "product" && (
@@ -348,7 +345,6 @@ export default function Workspace({ session, profile, onOpenSettings }) {
             onOpenTrash={() => { setMainView("trash"); setSelectedId(null); }}
             onOpenSettings={onOpenSettings}
             onLogout={handleLogout}
-            onGoDashboard={() => { setMainView("dashboard"); setSelectedId(null); setTopNavTab("overview"); }}
             trashActive={mainView === "trash"}
           />
         )}

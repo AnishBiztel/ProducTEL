@@ -661,7 +661,7 @@ button, input, textarea, select { transition: border-color .18s ease, background
   width: 310px;
   background: var(--panel);
 }
-.sidebar-head { padding: 20px 18px 14px; }
+.sidebar-head { padding: 12px 18px 8px; }
 .sidebar-title { font-size: 14px; letter-spacing: -.01em; }
 .stats-bar { padding-top: 14px; padding-bottom: 10px; }
 .stat-num { font-size: 18px; }
@@ -671,7 +671,7 @@ button, input, textarea, select { transition: border-color .18s ease, background
   border-radius: var(--radius-sm);
   box-shadow: none;
 }
-.search-box:focus-within { border-color: rgba(210, 118, 46,.6); box-shadow: 0 0 0 3px rgba(210, 118, 46,.10); }
+.search-box:focus-within { border-color: var(--line-bright); }
 .client-item { margin: 3px 4px; padding: 11px 12px; }
 .client-item:hover { background: color-mix(in srgb, var(--ink) 4%, transparent); border-color: var(--line); }
 .client-item.active { background: rgba(210, 118, 46,.095); border-color: transparent; box-shadow: inset 3px 0 0 #d2762e; }
@@ -979,15 +979,15 @@ button, input, textarea, select { transition: border-color .18s ease, background
 .breadcrumb-sep { color: var(--muted-2); opacity: 0.6; }
 .breadcrumb-current { color: var(--muted); font-weight: 600; }
 
-.kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 22px; }
+.kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 18px; }
 .kpi-card {
   position: relative; overflow: hidden;
-  background: var(--panel); border: 1px solid var(--line-bright); border-radius: var(--radius-lg);
-  padding: 20px 20px 18px; box-shadow: var(--shadow-1);
+  background: var(--panel); border: 1px solid var(--line-bright); border-radius: var(--radius);
+  padding: 12px 14px 11px; box-shadow: var(--shadow-1);
 }
-.kpi-num { font-size: 32px; font-weight: 800; letter-spacing: -0.02em; color: var(--ink); line-height: 1.1; font-family: var(--font); }
-.kpi-label { font-size: 13px; color: var(--muted); margin-top: 4px; }
-.kpi-bar { position: absolute; left: 0; right: 0; bottom: 0; height: 4px; }
+.kpi-num { font-size: 22px; font-weight: 800; letter-spacing: -0.02em; color: var(--ink); line-height: 1.1; font-family: var(--font); }
+.kpi-label { font-size: 11.5px; color: var(--muted); margin-top: 2px; }
+.kpi-bar { position: absolute; left: 0; right: 0; bottom: 0; height: 3px; }
 
 @media (max-width: 860px) {
   .kpi-row { grid-template-columns: repeat(2, 1fr); }

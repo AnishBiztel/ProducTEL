@@ -1,5 +1,4 @@
 import { useMemo } from "react";
-import { Activity, ArrowUpRight } from "lucide-react";
 import { STAGES, STAGE_COLORS } from "../lib/constants";
 
 function hexToRgba(hex, alpha) {
@@ -39,7 +38,6 @@ export default function ProjectStatusChart({ clients = [] }) {
     <section className="project-status-card" aria-label="Project status overview">
       <div className="project-status-head">
         <div>
-          <div className="project-status-kicker"><Activity size={13} /> Live pipeline</div>
           <h2>Project Status</h2>
         </div>
         <div className="project-status-head-meta">
@@ -75,19 +73,12 @@ export default function ProjectStatusChart({ clients = [] }) {
                   <span style={{ width: `${percentage}%`, background: item.color }} />
                 </span>
                 <span className="project-status-count">{item.count}</span>
-                <span className="project-status-percent">{percentage}%</span>
-                <ArrowUpRight size={13} className="project-status-arrow" />
               </div>
             );
           })}
         </div>
       </div>
 
-      {statusData.churned > 0 && (
-        <div className="project-status-footer">
-          <span>Excluded from active project distribution</span>
-        </div>
-      )}
     </section>
   );
 }

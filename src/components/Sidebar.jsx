@@ -1,16 +1,6 @@
-import { useState } from "react";
-import { Search, Download, Upload, ChevronDown, ChevronRight, Folder, Users, Activity, Trash2, Settings as SettingsIcon, LogOut } from "lucide-react";
+import { Search, Download, Upload, Trash2, Settings as SettingsIcon, LogOut } from "lucide-react";
 import { STAGES, STAGE_COLORS, PRIORITY_COLORS, STUCK_STAGE_DAYS } from "../lib/constants";
 import { timeAgo, isOverdue, daysSince } from "../lib/helpers";
-
-function SectionHeader({ label, open, onToggle }) {
-  return (
-    <button className="sidebar-section-head" onClick={onToggle}>
-      {open ? <ChevronDown size={13} /> : <ChevronRight size={13} />}
-      {label}
-    </button>
-  );
-}
 
 export default function Sidebar({
   filtered,
@@ -27,17 +17,8 @@ export default function Sidebar({
   onOpenTrash,
   onOpenSettings,
   onLogout,
-  onGoDashboard,
   trashActive,
 }) {
-  const [projectsOpen, setProjectsOpen] = useState(true);
-
-  function resetToDashboard() {
-    setStageFilter("All");
-    setQuery("");
-    onGoDashboard?.();
-  }
-
   return (
     <div className="sidebar">
       <div className="sidebar-head">
@@ -45,17 +26,6 @@ export default function Sidebar({
         <div className={"sync-state" + (syncState === "error" ? " error" : "")}>
           {syncState === "saving" ? "syncing…" : syncState === "synced" ? "synced" : syncState === "error" ? "sync failed" : ""}
         </div>
-      </div>
-
-      <div className="sidebar-nav-group">
-        <SectionHeader label="Projects" open={projectsOpen} onToggle={() => setProjectsOpen((o) => !o)} />
-        {projectsOpen && (
-          <div className="sidebar-nav-items">
-            <button className="sidebar-nav-item" onClick={resetToDashboard}><Folder size={13} /> All Projects</button>
-            <button className="sidebar-nav-item" onClick={resetToDashboard}><Users size={13} /> Clients Directory</button>
-            <button className="sidebar-nav-item" onClick={resetToDashboard}><Activity size={13} /> Client Status</button>
-          </div>
-        )}
       </div>
 
       <div className="filter-chips">

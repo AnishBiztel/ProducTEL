@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { LayoutGrid, Users, Map, Cpu, Search, Bell, Plus, CheckSquare } from "lucide-react";
+import { LayoutGrid, Users, Map, Cpu, Plus } from "lucide-react";
 import { initials } from "../lib/helpers";
 
 const TABS = [
@@ -17,9 +17,8 @@ function formatNow(d) {
   return `${time} ${day}-${month}-${year}`;
 }
 
-export default function TopNav({ activeTab, onNavigate, notificationCount, userEmail, onOpenSettings, onNewActivity, onCreateTask }) {
+export default function TopNav({ activeTab, onNavigate, userEmail, onOpenSettings, onNewClient }) {
   const [now, setNow] = useState(new Date());
-  const [query, setQuery] = useState("");
 
   useEffect(() => {
     const t = setInterval(() => setNow(new Date()), 30000);
@@ -49,26 +48,7 @@ export default function TopNav({ activeTab, onNavigate, notificationCount, userE
       </nav>
 
       <div className="topnav-utility">
-        <div className="topnav-search">
-          <Search size={13} />
-          <input
-            placeholder="Quick search…"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" && query.trim()) {
-                onNavigate("clients", query.trim());
-                setQuery("");
-              }
-            }}
-          />
-        </div>
-        <button className="topnav-icon-btn" aria-label={`${notificationCount} notifications`} onClick={() => onNavigate("overview")}>
-          <Bell size={16} />
-          {notificationCount > 0 && <span className="topnav-badge">{notificationCount > 9 ? "9+" : notificationCount}</span>}
-        </button>
-        <button className="btn btn-sm" onClick={onNewActivity}><Plus size={13} /> New Activity</button>
-        <button className="btn btn-sm btn-primary" onClick={onCreateTask}><CheckSquare size={13} /> Create Task</button>
+        <button className="btn btn-sm btn-primary" onClick={onNewClient}><Plus size={13} /> New</button>
         <span className="topnav-clock">{formatNow(now)}</span>
         <button className="topnav-avatar" aria-label={userEmail} onClick={onOpenSettings}>{initials(userEmail)}</button>
       </div>
