@@ -8,8 +8,8 @@ function stageDuration(c) {
   return daysSince(c.stageEnteredAt);
 }
 
-export default function Dashboard({ allClients, filtered, onSelect, onAddClient }) {
-  const [view, setView] = useState("kanban");
+export default function Dashboard({ allClients, filtered, onSelect, onAddClient, initialView }) {
+  const [view, setView] = useState(initialView || "kanban");
   const [sortKey, setSortKey] = useState("updatedAt");
   const [sortDir, setSortDir] = useState("desc");
 
@@ -94,7 +94,7 @@ export default function Dashboard({ allClients, filtered, onSelect, onAddClient 
       { label: "Open issues", value: (c) => c.issues.filter((i) => !i.resolved).length },
       { label: "Specs", value: (c) => c.specs.length },
     ]);
-    downloadBlob(csv, "producTEL-clients-" + new Date().toISOString().slice(0, 10) + ".csv", "text/csv");
+    downloadBlob(csv, "coredesk-clients-" + new Date().toISOString().slice(0, 10) + ".csv", "text/csv");
   }
 
   return (

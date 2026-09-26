@@ -32,8 +32,8 @@ export default function AuthScreen() {
     <div className="auth-screen">
       <div className="auth-card">
         <div className="auth-brand">
-          <span className="auth-logo">PT</span>
-          ProducTEL
+          <span className="auth-logo">CD</span>
+          CoreDesk
         </div>
         <div className="auth-sub">Sign in with your team account</div>
 

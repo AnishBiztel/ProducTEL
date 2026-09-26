@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 
 const ThemeContext = createContext(null);
-const STORAGE_KEY = "producTEL-theme";
+const STORAGE_KEY = "coredesk-theme";
 
 function getInitialTheme() {
   if (typeof window === "undefined") return "dark";

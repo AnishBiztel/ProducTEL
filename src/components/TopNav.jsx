@@ -28,8 +28,8 @@ export default function TopNav({ activeTab, onNavigate, userEmail, onOpenSetting
   return (
     <header className="topnav">
       <div className="topnav-brand">
-        <span className="topnav-logo">PT</span>
-        <span className="topnav-brand-name">ProducTEL</span>
+        <span className="topnav-logo">CD</span>
+        <span className="topnav-brand-name">CoreDesk</span>
       </div>
 
       <nav className="topnav-tabs" aria-label="Main">

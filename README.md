@@ -1,4 +1,4 @@
-# ProducTEL
+# CoreDesk
 
 Internal client & deployment tracker for BIZTEL AI's client solutions
 workflow — pipeline tracking, requirement gathering, specs, go-to-deployment
@@ -30,7 +30,7 @@ file attachments, comments, soft delete, and a dashboard.
 
 ## Setup
 See `SETUP.md` for the full walkthrough (Supabase project, schema, storage
-bucket, env vars, deployment). If you're upgrading an existing ProducTEL
+bucket, env vars, deployment). If you're upgrading an existing CoreDesk
 install, just re-run the updated `supabase-setup.sql` — it's safe to run
 again and will add the new tables/columns without touching existing data.
 

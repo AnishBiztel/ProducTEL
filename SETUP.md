@@ -18,7 +18,7 @@ password anytime.
    (audit log), `comments`, and `workspace_settings` (default templates) tables,
    the private `client-files` storage bucket, and every RLS policy needed.
 
-**Already have an older ProducTEL database?** Just re-run this same file — every
+**Already have an older CoreDesk database?** Just re-run this same file — every
 statement uses `IF NOT EXISTS` / `DROP POLICY IF EXISTS`, so it only adds what's
 missing and won't touch your existing clients.
 

@@ -66,7 +66,7 @@ export default function Workspace({ session, profile, onOpenSettings }) {
     return (
       <div className="app-shell">
         <div className="navrail">
-          <div className="navrail-logo">PT</div>
+          <div className="navrail-logo">CD</div>
         </div>
         <div className="sidebar">
           <SidebarSkeleton />
@@ -249,7 +249,7 @@ export default function Workspace({ session, profile, onOpenSettings }) {
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = "producTEL-backup-" + new Date().toISOString().slice(0, 10) + ".json";
+    a.download = "coredesk-backup-" + new Date().toISOString().slice(0, 10) + ".json";
     a.click();
     URL.revokeObjectURL(url);
   }
@@ -353,7 +353,14 @@ export default function Workspace({ session, profile, onOpenSettings }) {
           {mainView === "trash" && <TrashPanel isAdmin={isAdmin} onChanged={loadClients} />}
           {mainView === "product" && <ProductWorkspace key={productInitialTab} session={session} initialTab={productInitialTab} />}
           {mainView === "dashboard" && (
-            <Dashboard allClients={clients} filtered={filtered} onSelect={selectClient} onAddClient={addClient} />
+            <Dashboard
+              key={topNavTab}
+              allClients={clients}
+              filtered={filtered}
+              onSelect={selectClient}
+              onAddClient={addClient}
+              initialView={topNavTab === "clients" ? "table" : "kanban"}
+            />
           )}
           {mainView === "client" && selected && (
             <ClientDetail

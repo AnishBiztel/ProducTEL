@@ -1,4 +1,4 @@
--- ProducTEL — full schema (safe to re-run: uses IF NOT EXISTS / DROP POLICY IF EXISTS
+-- CoreDesk — full schema (safe to re-run: uses IF NOT EXISTS / DROP POLICY IF EXISTS
 -- throughout, so existing installs can re-run this file to pick up new features).
 -- Run in Supabase Dashboard -> SQL Editor -> New query.
 

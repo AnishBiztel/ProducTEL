@@ -24,7 +24,7 @@ export default function HardwarePanel({ items, features, clients, onAdd, onUpdat
 
   function handleExport() {
     exportToExcel(
-      "producTEL-hardware-bom",
+      "coredesk-hardware-bom",
       "Hardware BOM",
       filtered.map((h) => ({
         "Component name": h.name,
