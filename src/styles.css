@@ -926,31 +926,31 @@ button, input, textarea, select { transition: border-color .18s ease, background
    already uses these CSS variables adapts automatically.
    ========================================================= */
 [data-theme="light"] {
-  --bg: #F5F7FA;
+  --bg: #F8F9FA;
   --panel: #FFFFFF;
-  --panel-2: #F1F2F5;
-  --panel-3: #E7E9EE;
-  --panel-4: #DBDEE5;
-  --line: #E1E3E9;
+  --panel-2: #F4F5F7;
+  --panel-3: #EBECF0;
+  --panel-4: #DFE1E6;
+  --line: #DFE1E6;
   --line-soft: #EBECF0;
-  --line-bright: #C7CBD3;
-  --ink: #16181D;
-  --muted: #5B5F6B;
-  --muted-2: #868A96;
-  --accent: #A85A1D;
-  --accent-bright: #8E4A15;
-  --accent-soft: #FBEADA;
-  --accent-ink: #6E3B10;
+  --line-bright: #C1C7D0;
+  --ink: #172B4D;
+  --muted: #6B778C;
+  --muted-2: #97A0AF;
+  --accent: #0052CC;
+  --accent-bright: #0065FF;
+  --accent-soft: #DEEBFF;
+  --accent-ink: #0747A6;
   --amber: #B5790A;
   --amber-soft: #FBF0DA;
-  --red: #D6473C;
-  --red-soft: #FCE7E5;
-  --green: #1F9260;
-  --green-soft: #E1F5EB;
+  --red: #DE350B;
+  --red-soft: #FFEBE6;
+  --green: #00875A;
+  --green-soft: #E3FCEF;
   --violet: #6E5CD6;
   --violet-soft: #ECE9FB;
-  --shadow-1: 0 1px 2px rgba(20, 24, 33, 0.06);
-  --shadow-2: 0 12px 32px rgba(20, 24, 33, 0.12);
+  --shadow-1: 0 1px 2px rgba(23, 43, 77, 0.08);
+  --shadow-2: 0 8px 24px rgba(23, 43, 77, 0.14);
   --shadow-ring: 0 0 0 3px var(--accent-soft), 0 0 0 1px var(--accent);
 }
 
@@ -1012,4 +1012,105 @@ button, input, textarea, select { transition: border-color .18s ease, background
 
 @media (max-width: 860px) {
   .kpi-row { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ---------- Global Top Navigation ---------- */
+.topnav {
+  height: 56px; flex-shrink: 0; display: flex; align-items: center; gap: 20px;
+  padding: 0 18px; background: var(--panel); border-bottom: 1px solid var(--line-bright);
+  position: relative; z-index: 10;
+}
+.topnav-brand { display: flex; align-items: center; gap: 9px; flex-shrink: 0; }
+.topnav-logo {
+  width: 30px; height: 30px; border-radius: var(--radius-sm); background: var(--accent);
+  color: #fff; display: flex; align-items: center; justify-content: center;
+  font-weight: 800; font-size: 12px; flex-shrink: 0;
+}
+.topnav-brand-name { font-weight: 700; font-size: 14.5px; letter-spacing: -0.01em; color: var(--ink); white-space: nowrap; }
+.topnav-tabs { display: flex; align-items: center; gap: 2px; flex: 1; overflow-x: auto; }
+.topnav-tab {
+  display: flex; align-items: center; gap: 6px; padding: 8px 12px; border-radius: var(--radius-sm);
+  border: none; background: none; color: var(--muted); font-size: 13px; font-weight: 500;
+  cursor: pointer; white-space: nowrap; font-family: var(--font); transition: all 0.15s var(--ease);
+}
+.topnav-tab:hover { background: var(--panel-2); color: var(--ink); }
+.topnav-tab.active { background: var(--accent-soft); color: var(--accent-ink); font-weight: 600; }
+.topnav-utility { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+.topnav-search {
+  display: flex; align-items: center; gap: 6px; background: var(--panel-2); border: 1px solid var(--line);
+  border-radius: var(--radius-sm); padding: 6px 10px; width: 170px;
+}
+.topnav-search input { border: none; outline: none; background: none; color: var(--ink); font-size: 12.5px; width: 100%; }
+.topnav-search input::placeholder { color: var(--muted-2); }
+.topnav-icon-btn {
+  position: relative; border: none; background: none; color: var(--muted); cursor: pointer;
+  padding: 7px; border-radius: var(--radius-sm); display: flex;
+}
+.topnav-icon-btn:hover { background: var(--panel-2); color: var(--ink); }
+.topnav-badge {
+  position: absolute; top: 2px; right: 2px; background: var(--red); color: #fff;
+  font-size: 9px; font-weight: 700; border-radius: 999px; min-width: 15px; height: 15px;
+  display: flex; align-items: center; justify-content: center; padding: 0 3px; font-family: var(--mono);
+}
+.topnav-clock { font-size: 11.5px; color: var(--muted-2); font-family: var(--mono); white-space: nowrap; }
+.topnav-avatar {
+  width: 32px; height: 32px; border-radius: 50%; background: var(--panel-3); border: 1px solid var(--line-bright);
+  color: var(--ink); font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center;
+  cursor: pointer; flex-shrink: 0;
+}
+@media (max-width: 1100px) {
+  .topnav-search, .topnav-clock { display: none; }
+}
+
+/* ---------- App shell without the old icon nav rail ---------- */
+.app-shell-no-navrail { height: calc(100vh - 56px); }
+
+/* ---------- Sidebar nav sections (Projects / Analytics & Assets) ---------- */
+.sidebar-nav-group { padding: 10px 10px 4px; }
+.sidebar-nav-group-bottom { border-top: 1px solid var(--line-soft); margin-top: 6px; padding-top: 12px; }
+.sidebar-section-head {
+  display: flex; align-items: center; gap: 6px; width: 100%; text-align: left;
+  border: none; background: none; color: var(--muted); font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.06em; padding: 6px; cursor: pointer; font-family: var(--font);
+}
+.sidebar-section-head:hover { color: var(--ink); }
+.sidebar-nav-items { display: flex; flex-direction: column; gap: 1px; margin-top: 2px; }
+.sidebar-nav-item {
+  display: flex; align-items: center; gap: 9px; padding: 7px 8px 7px 20px; border-radius: var(--radius-sm);
+  border: none; background: none; color: var(--muted); font-size: 12.5px; text-align: left; cursor: pointer;
+  font-family: var(--font); width: 100%;
+}
+.sidebar-nav-item:hover { background: var(--panel-2); color: var(--ink); }
+
+/* ---------- Sidebar footer icon row (Trash / Settings / Logout) ---------- */
+.sidebar-footer-icons { padding-top: 0; border-top: none; gap: 4px; justify-content: flex-end; }
+.sidebar-footer-icons .icon-btn { flex: 0 0 auto; justify-content: center; padding: 8px; }
+.sidebar-footer-icons .icon-btn.active { background: var(--accent-soft); color: var(--accent-ink); }
+
+/* ---------- Right analytics rail ---------- */
+.right-rail {
+  width: 300px; flex-shrink: 0; border-left: 1px solid var(--line-bright); background: var(--panel);
+  overflow-y: auto; padding: 18px 16px;
+}
+.right-rail-section { margin-bottom: 26px; }
+.right-rail-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); margin-bottom: 12px; }
+.rail-kpi-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.rail-kpi { background: var(--panel-2); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 10px 12px; }
+.rail-kpi-num { font-size: 20px; font-weight: 800; color: var(--ink); font-family: var(--font); line-height: 1.1; }
+.rail-kpi-label { font-size: 10.5px; color: var(--muted); margin-top: 3px; }
+.rail-dist-row { display: flex; align-items: center; gap: 8px; margin-bottom: 9px; font-size: 12px; }
+.rail-dist-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+.rail-dist-label { width: 68px; flex-shrink: 0; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.rail-dist-bar { flex: 1; height: 6px; background: var(--panel-3); border-radius: 999px; overflow: hidden; }
+.rail-dist-bar-fill { height: 100%; border-radius: 999px; }
+.rail-dist-count { width: 16px; text-align: right; color: var(--muted-2); font-family: var(--mono); font-size: 11px; flex-shrink: 0; }
+.rail-checklist-row { display: flex; align-items: flex-start; gap: 8px; padding: 8px 0; border-bottom: 1px solid var(--line-soft); cursor: pointer; }
+.rail-checklist-row:last-child { border-bottom: none; }
+.rail-checklist-row:hover .rail-checklist-label { color: var(--accent-ink); }
+.rail-checklist-text { min-width: 0; }
+.rail-checklist-label { font-size: 12.5px; color: var(--ink); line-height: 1.4; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+.rail-checklist-client { font-size: 10.5px; color: var(--muted-2); margin-top: 2px; }
+
+@media (max-width: 1300px) {
+  .right-rail { display: none; }
 }

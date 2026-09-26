@@ -1,11 +1,11 @@
 import { useState, useEffect, useRef } from "react";
-import { LayoutGrid, Trash2, Settings as SettingsIcon, LogOut, Lightbulb } from "lucide-react";
+import { LayoutGrid } from "lucide-react";
 import { supabase } from "./supabaseClient";
 import {
   fetchClients, insertClient, updateClientRow, softDeleteClient, bulkInsertClients,
   logActivity, emptyClient, emptySpec, ensureShape, fetchWorkspaceSettings,
 } from "./lib/api";
-import { initials, uid } from "./lib/helpers";
+import { initials, uid, isOverdue } from "./lib/helpers";
 import { refreshWhenIdle } from "./lib/editGuard";
 import { useToast } from "./components/Toast";
 import { useConfirm } from "./components/ConfirmDialog";
@@ -15,11 +15,15 @@ import Dashboard from "./components/Dashboard";
 import ClientDetail from "./components/ClientDetail";
 import TrashPanel from "./components/TrashPanel";
 import ProductWorkspace from "./components/product/ProductWorkspace";
+import TopNav from "./components/TopNav";
+import RightRail from "./components/RightRail";
 
 export default function Workspace({ session, profile, onOpenSettings }) {
   const [clients, setClients] = useState(null);
   const [selectedId, setSelectedId] = useState(null);
   const [mainView, setMainView] = useState("dashboard"); // dashboard | client | trash | product
+  const [topNavTab, setTopNavTab] = useState("overview");
+  const [productInitialTab, setProductInitialTab] = useState("inbox");
   const [query, setQuery] = useState("");
   const [stageFilter, setStageFilter] = useState("All");
   const [saveState, setSaveState] = useState("idle");
@@ -293,78 +297,100 @@ export default function Workspace({ session, profile, onOpenSettings }) {
     await supabase.auth.signOut();
   }
 
+  function handleTopNavigate(tabKey, searchText) {
+    setTopNavTab(tabKey);
+    if (tabKey === "roadmap") {
+      setProductInitialTab("roadmap");
+      setMainView("product");
+      setSelectedId(null);
+    } else if (tabKey === "hardware") {
+      setProductInitialTab("hardware");
+      setMainView("product");
+      setSelectedId(null);
+    } else {
+      setMainView("dashboard");
+      setSelectedId(null);
+      if (searchText) setQuery(searchText);
+    }
+  }
+
+  const notificationCount = clients.filter((c) => !c.churned && isOverdue(c.nextActionDate)).length;
+
   return (
-    <div className="app-shell">
-      <div className="navrail">
-        <div className="navrail-logo">PT</div>
-        <button className={"navrail-btn" + (mainView !== "trash" && mainView !== "product" ? " active" : "")} aria-label="Dashboard" onClick={() => { setMainView("dashboard"); setSelectedId(null); }}>
-          <LayoutGrid size={18} />
-        </button>
-        <button className={"navrail-btn" + (mainView === "product" ? " active" : "")} aria-label="Product workspace" onClick={() => { setMainView("product"); setSelectedId(null); }}>
-          <Lightbulb size={18} />
-        </button>
-        <button className={"navrail-btn" + (mainView === "trash" ? " active" : "")} aria-label="Trash" onClick={() => { setMainView("trash"); setSelectedId(null); }}>
-          <Trash2 size={18} />
-        </button>
-        <div className="navrail-spacer" />
-        <button className="navrail-btn" aria-label="Settings" onClick={onOpenSettings}><SettingsIcon size={18} /></button>
-        <button className="navrail-btn" aria-label="Sign out" onClick={handleLogout}><LogOut size={18} /></button>
-        <div className="navrail-avatar" aria-label={userEmail} onClick={onOpenSettings} style={{ marginTop: 4 }}>{initials(userEmail)}</div>
-      </div>
-
-      {mainView !== "trash" && mainView !== "product" && (
-        <Sidebar
-          filtered={filtered}
-          selectedId={selectedId}
-          onSelect={selectClient}
-          query={query}
-          setQuery={setQuery}
-          stageFilter={stageFilter}
-          setStageFilter={setStageFilter}
-          syncState={saveState}
-          onExport={exportData}
-          onImport={importData}
-          fileInputRef={fileInputRef}
-          totalClients={totalClients}
-          activeClients={activeClients}
-          openIssues={openIssues}
-          pendingSpecs={pendingSpecs}
-        />
-      )}
-
-      <div className="main">
-        {mainView === "trash" && <TrashPanel isAdmin={isAdmin} onChanged={loadClients} />}
-        {mainView === "product" && <ProductWorkspace session={session} />}
-        {mainView === "dashboard" && (
-          <Dashboard allClients={clients} filtered={filtered} onSelect={selectClient} onAddClient={addClient} />
-        )}
-        {mainView === "client" && selected && (
-          <ClientDetail
-            client={selected}
-            userEmail={userEmail}
-            isAdmin={isAdmin}
-            updateClient={updateClient}
-            addSpec={addSpec}
-            updateSpec={updateSpec}
-            deleteSpec={deleteSpec}
-            addGatheringQuestion={addGatheringQuestion}
-            updateGatheringItem={updateGatheringItem}
-            deleteGatheringItem={deleteGatheringItem}
-            addIssue={addIssue}
-            toggleIssue={toggleIssue}
-            deleteIssue={deleteIssue}
-            updateGtdStep={updateGtdStep}
-            toggleGtdStep={toggleGtdStep}
-            onDeleteClient={deleteClient}
+    <>
+      <TopNav
+        activeTab={topNavTab}
+        onNavigate={handleTopNavigate}
+        notificationCount={notificationCount}
+        userEmail={userEmail}
+        onOpenSettings={onOpenSettings}
+        onNewActivity={addClient}
+        onCreateTask={() => handleTopNavigate("roadmap")}
+      />
+      <div className="app-shell app-shell-no-navrail">
+        {mainView !== "trash" && mainView !== "product" && (
+          <Sidebar
+            filtered={filtered}
+            selectedId={selectedId}
+            onSelect={selectClient}
+            query={query}
+            setQuery={setQuery}
+            stageFilter={stageFilter}
+            setStageFilter={setStageFilter}
+            syncState={saveState}
+            onExport={exportData}
+            onImport={importData}
+            fileInputRef={fileInputRef}
+            totalClients={totalClients}
+            activeClients={activeClients}
+            openIssues={openIssues}
+            pendingSpecs={pendingSpecs}
+            onOpenTrash={() => { setMainView("trash"); setSelectedId(null); }}
+            onOpenSettings={onOpenSettings}
+            onLogout={handleLogout}
+            onOpenHardware={() => handleTopNavigate("hardware")}
+            trashActive={mainView === "trash"}
           />
         )}
-        {mainView === "client" && !selected && (
-          <div className="empty-main">
-            <LayoutGrid size={28} strokeWidth={1.5} />
-            <div>Select a client from the sidebar, or add a new one.</div>
-          </div>
+
+        <div className="main">
+          {mainView === "trash" && <TrashPanel isAdmin={isAdmin} onChanged={loadClients} />}
+          {mainView === "product" && <ProductWorkspace session={session} initialTab={productInitialTab} />}
+          {mainView === "dashboard" && (
+            <Dashboard allClients={clients} filtered={filtered} onSelect={selectClient} onAddClient={addClient} />
+          )}
+          {mainView === "client" && selected && (
+            <ClientDetail
+              client={selected}
+              userEmail={userEmail}
+              isAdmin={isAdmin}
+              updateClient={updateClient}
+              addSpec={addSpec}
+              updateSpec={updateSpec}
+              deleteSpec={deleteSpec}
+              addGatheringQuestion={addGatheringQuestion}
+              updateGatheringItem={updateGatheringItem}
+              deleteGatheringItem={deleteGatheringItem}
+              addIssue={addIssue}
+              toggleIssue={toggleIssue}
+              deleteIssue={deleteIssue}
+              updateGtdStep={updateGtdStep}
+              toggleGtdStep={toggleGtdStep}
+              onDeleteClient={deleteClient}
+            />
+          )}
+          {mainView === "client" && !selected && (
+            <div className="empty-main">
+              <LayoutGrid size={28} strokeWidth={1.5} />
+              <div>Select a client from the sidebar, or add a new one.</div>
+            </div>
+          )}
+        </div>
+
+        {(mainView === "dashboard" || mainView === "client") && (
+          <RightRail allClients={clients} onSelectClient={selectClient} />
         )}
       </div>
-    </div>
+    </>
   );
 }

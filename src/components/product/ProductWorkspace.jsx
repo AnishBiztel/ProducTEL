@@ -15,8 +15,8 @@ import { refreshWhenIdle } from "../../lib/editGuard";
 import { useToast } from "../Toast";
 import { SkeletonLine, SkeletonBlock } from "../Skeleton";
 
-export default function ProductWorkspace({ session }) {
-  const [tab, setTab] = useState("inbox"); // inbox | roadmap | changelog | hardware
+export default function ProductWorkspace({ session, initialTab }) {
+  const [tab, setTab] = useState(initialTab || "inbox"); // inbox | roadmap | changelog | hardware
   const [features, setFeatures] = useState(null);
   const [releases, setReleases] = useState(null);
   const [hardware, setHardware] = useState(null);
