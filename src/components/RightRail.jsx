@@ -29,10 +29,10 @@ export default function RightRail({ allClients }) {
       <div className="right-rail-section">
         <div className="right-rail-title">Dashboard insights</div>
         <div className="rail-kpi-grid">
-          <div className="rail-kpi"><div className="rail-kpi-num">{stats.activeCount}</div><div className="rail-kpi-label">Active clients</div></div>
-          <div className="rail-kpi"><div className="rail-kpi-num" style={{ color: stats.openIssues ? "var(--red)" : "var(--ink)" }}>{stats.openIssues}</div><div className="rail-kpi-label">Open issue{stats.openIssues === 1 ? "" : "s"}</div></div>
-          <div className="rail-kpi"><div className="rail-kpi-num" style={{ color: stats.pendingTasks ? "var(--amber)" : "var(--ink)" }}>{stats.pendingTasks}</div><div className="rail-kpi-label">Pending tasks</div></div>
-          <div className="rail-kpi"><div className="rail-kpi-num">{stats.velocity}%</div><div className="rail-kpi-label">Pipeline velocity</div></div>
+          <div className="rail-kpi rail-kpi-neutral"><div className="rail-kpi-num">{stats.activeCount}</div><div className="rail-kpi-label">Active clients</div></div>
+          <div className={"rail-kpi" + (stats.openIssues ? " rail-kpi-red" : " rail-kpi-neutral")}><div className="rail-kpi-num" style={{ color: stats.openIssues ? "var(--red)" : "var(--ink)" }}>{stats.openIssues}</div><div className="rail-kpi-label">Open issue{stats.openIssues === 1 ? "" : "s"}</div></div>
+          <div className={"rail-kpi" + (stats.pendingTasks ? " rail-kpi-amber" : " rail-kpi-neutral")}><div className="rail-kpi-num" style={{ color: stats.pendingTasks ? "var(--amber)" : "var(--ink)" }}>{stats.pendingTasks}</div><div className="rail-kpi-label">Pending tasks</div></div>
+          <div className="rail-kpi rail-kpi-accent"><div className="rail-kpi-num">{stats.velocity}%</div><div className="rail-kpi-label">Pipeline velocity</div></div>
         </div>
       </div>
 

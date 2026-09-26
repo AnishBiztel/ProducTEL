@@ -124,22 +124,22 @@ export default function Dashboard({ allClients, filtered, onSelect, onAddClient,
       </div>
 
       <div className="kpi-row">
-        <div className="kpi-card">
+        <div className="kpi-card kpi-card-neutral">
           <div className="kpi-num">{kpis.total}</div>
           <div className="kpi-label">Clients</div>
           <div className="kpi-bar" style={{ background: "var(--accent)" }} />
         </div>
-        <div className="kpi-card">
+        <div className="kpi-card kpi-card-accent">
           <div className="kpi-num">{kpis.active}</div>
           <div className="kpi-label">Active</div>
           <div className="kpi-bar" style={{ background: "var(--green)" }} />
         </div>
-        <div className="kpi-card">
+        <div className="kpi-card kpi-card-red">
           <div className="kpi-num">{kpis.issues}</div>
           <div className="kpi-label">Issues</div>
           <div className="kpi-bar" style={{ background: "var(--red)" }} />
         </div>
-        <div className="kpi-card">
+        <div className="kpi-card kpi-card-amber">
           <div className="kpi-num">{kpis.pending}</div>
           <div className="kpi-label">Pending</div>
           <div className="kpi-bar" style={{ background: "var(--amber)" }} />
