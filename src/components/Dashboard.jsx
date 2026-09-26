@@ -161,9 +161,6 @@ export default function Dashboard({ allClients, filtered, onSelect, onAddClient 
           <Clock size={14} />
           <b>{digest.stale.length}</b> not contacted in {STALE_DAYS}+ days
         </div>
-        <div className="digest-item">
-          <b>{digest.openIssues}</b> open issue{digest.openIssues === 1 ? "" : "s"} workspace-wide
-        </div>
       </div>
 
       {view === "kanban" ? (

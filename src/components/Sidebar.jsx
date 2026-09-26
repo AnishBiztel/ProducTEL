@@ -24,14 +24,11 @@ export default function Sidebar({
   onExport,
   onImport,
   fileInputRef,
-  totalClients,
-  activeClients,
-  openIssues,
-  pendingSpecs,
   onOpenTrash,
   onOpenSettings,
   onLogout,
   onOpenHardware,
+  onGoDashboard,
   trashActive,
 }) {
   const [projectsOpen, setProjectsOpen] = useState(true);
@@ -40,6 +37,7 @@ export default function Sidebar({
   function resetToDashboard() {
     setStageFilter("All");
     setQuery("");
+    onGoDashboard?.();
   }
 
   return (
@@ -60,13 +58,6 @@ export default function Sidebar({
             <button className="sidebar-nav-item" onClick={resetToDashboard}><Activity size={13} /> Client Status</button>
           </div>
         )}
-      </div>
-
-      <div className="stats-bar">
-        <div className="stat"><span className="stat-num">{totalClients}</span><span className="stat-label">clients</span></div>
-        <div className="stat"><span className="stat-num" style={{ color: "var(--accent)" }}>{activeClients}</span><span className="stat-label">active</span></div>
-        <div className="stat"><span className="stat-num" style={{ color: openIssues > 0 ? "var(--red)" : "var(--muted)" }}>{openIssues}</span><span className="stat-label">issues</span></div>
-        <div className="stat"><span className="stat-num" style={{ color: pendingSpecs > 0 ? "var(--amber)" : "var(--muted)" }}>{pendingSpecs}</span><span className="stat-label">pending</span></div>
       </div>
 
       <div className="filter-chips">

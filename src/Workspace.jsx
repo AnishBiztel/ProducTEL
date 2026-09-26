@@ -349,13 +349,14 @@ export default function Workspace({ session, profile, onOpenSettings }) {
             onOpenSettings={onOpenSettings}
             onLogout={handleLogout}
             onOpenHardware={() => handleTopNavigate("hardware")}
+            onGoDashboard={() => { setMainView("dashboard"); setSelectedId(null); setTopNavTab("overview"); }}
             trashActive={mainView === "trash"}
           />
         )}
 
         <div className="main">
           {mainView === "trash" && <TrashPanel isAdmin={isAdmin} onChanged={loadClients} />}
-          {mainView === "product" && <ProductWorkspace session={session} initialTab={productInitialTab} />}
+          {mainView === "product" && <ProductWorkspace key={productInitialTab} session={session} initialTab={productInitialTab} />}
           {mainView === "dashboard" && (
             <Dashboard allClients={clients} filtered={filtered} onSelect={selectClient} onAddClient={addClient} />
           )}
